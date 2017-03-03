@@ -1,5 +1,8 @@
-PVector location1, location2, velocity1, velocity2, acceleration, force1, force2;
-PImage sprite1, sprite2;
+Boolean shooting1, shooting2;
+PImage sprite1, sprite2, bullet1, bullet2;
+PVector location1, location2, velocity1, velocity2, acceleration, force1, force2,
+shot1, shot2;
+
 void setup()
 {
  fullScreen(P3D);
@@ -10,9 +13,13 @@ void setup()
  acceleration = new PVector (random(-0.001,0.01), random(-1, 1)); 
  force1 = new PVector(0, 0);
  force2 = new PVector(0, 0);
+ shot1 = new PVector(location1.x, location1.y);
+ shot2 = new PVector(location2.x, location2.y);
  
  sprite1 = loadImage("Sprite1.png");
  sprite2 = loadImage("Sprite2.png");
+ bullet1 = loadImage("Bullet1.png");
+ bullet2 = loadImage("Bullet2.png");
 }
 
 void draw()
@@ -35,6 +42,10 @@ void draw()
   fill (75);
   image (sprite1, location1.x, location1.y);
   image (sprite2, location2.x, location2.y, 20, 20);
+  
+  image (bullet1, shot1.x, shot1.y);
+  image (bullet2, shot2.x, shot2.y);
+  
  
   camera(width/2, height/2, (height/2.0) / tan(PI*30.0 / 180.0), 
   width/2, height/2, 0, 
@@ -73,6 +84,15 @@ void handleMovement()
     force1.y = 0;
   }
   
+  if (key == 'e')
+  {
+    shooting1 = true;
+  }
+  else
+  {
+    shooting1 = false;
+  }
+  
   if (key == 'i')
   {
     force2.x = 0;
@@ -86,12 +106,21 @@ void handleMovement()
   else if (key == 'k')
   {
     force2.x = 0;
-    force2.y = +5;
+    force2.y = 5;
   }
   else if (key == 'l')
   {
     force2.x = 5;
     force2.y = 0;
+  }
+  
+  if (key == 'o')
+  {
+    shooting2 = true;
+  }
+  else 
+  {
+    shooting2 = false;
   }
 } 
 
